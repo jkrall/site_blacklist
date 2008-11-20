@@ -1,0 +1,16 @@
+require "rubygems"
+require "spec"
+# gem install redgreen for colored test output
+begin require "redgreen" unless ENV['TM_CURRENT_LINE']; rescue LoadError; end
+
+require "active_support"
+
+silence_warnings do
+  require "action_controller"
+  require "action_controller/integration"
+end
+
+require File.dirname(__FILE__) + "/fakes/test_session"
+
+Spec::Runner.configure do |config|
+end
