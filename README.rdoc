@@ -1,0 +1,51 @@
+= SiteBlacklist
+
+SiteBlacklist is a simple rails plugin for blacklisting specific remote servers from accessing your rails site.
+
+It uses a yaml config file (config/site_blacklist.yml) to specify a list of servers, or regexes to match servers,
+that should not be allowed to access the site.  If a match is found, it will trigger a user-specified response.
+
+== Usage
+
+Simply include the plugin into your ApplicationController, then specify how the plugin should respond to blacklisted sites:
+
+  class ApplicationController < ActionController::Base
+    include SiteBlacklist
+    
+	 blacklisted_site_response do |site, match|
+	 	RAILS_DEFAULT_LOGGER.info "Hack Attempt!  From: #{site}, matched to: #{match}"
+	   return render(:file => "#{RAILS_ROOT}/public/404.html", :status => 404)
+	 end
+	 
+	 ...
+  end
+
+You can also specify a method name instead of a block:
+
+  class ApplicationController < ActionController::Base
+    include SiteBlacklist
+    
+	 blacklisted_site_response :you_are_not_allowed
+	
+	 def you_are_not_allowed(site, match)
+	 	RAILS_DEFAULT_LOGGER.info "Hack Attempt!  From: #{site}, matched to: #{match}"
+	   return render(:file => "#{RAILS_ROOT}/public/404.html", :status => 404)
+	 end
+	 
+	 ...
+  end
+
+== Configuration
+
+SiteBlacklist takes a simple yaml config file:  RAILS_ROOT/config/site_blacklist.yml
+
+There is an example file in the plugin directory, for reference.
+
+The format is simple... the plugin expects a hash key :blacklist, with an array of sites or regexes to match sites.
+Each item in the array is either a specific site name, or a regex that will be used to match to server names.  If the line begins and ends with /, then it assumes that it should be treated as a regex.
+
+
+== Credits
+
+SiteBlacklist was created, and is maintained by {Joshua Krall}[http://transfs.com/devblog].  More info at {Transparent Development}[http://transfs.com/devblog], the {Transparent Financial Services}[http://transfs.com] development blog.
+
