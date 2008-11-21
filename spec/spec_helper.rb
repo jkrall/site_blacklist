@@ -10,7 +10,9 @@ silence_warnings do
   require "action_controller/integration"
 end
 
-require File.dirname(__FILE__) + "/fakes/test_session"
-
 Spec::Runner.configure do |config|
 end
+
+require File.expand_path(File.dirname(__FILE__) + "/../lib/site_blacklist")
+
+RAILS_ROOT = File.expand_path(File.dirname(__FILE__))
