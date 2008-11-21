@@ -10,29 +10,29 @@ that should not be allowed to access the site.  If a match is found, it will tri
 Simply include the plugin into your ApplicationController, then specify how the plugin should respond to blacklisted sites:
 
   class ApplicationController < ActionController::Base
-		include SiteBlacklist
+    include SiteBlacklist
     
-    	blacklisted_site_response do |site, match|
-			RAILS_DEFAULT_LOGGER.info "Hack Attempt!  From: #{site}, matched to: #{match}"
-			return render(:file => "#{RAILS_ROOT}/public/404.html", :status => 404)
-		end
-	 
-		...
+    blacklisted_site_response do |site, match|
+      RAILS_DEFAULT_LOGGER.info "Hack Attempt!  From: #{site}, matched to: #{match}"
+      return render(:file => "#{RAILS_ROOT}/public/404.html", :status => 404)
+    end
+    
+    ...
   end
 
 You can also specify a method name instead of a block:
 
   class ApplicationController < ActionController::Base
-		include SiteBlacklist
+    include SiteBlacklist
     
-		blacklisted_site_response :you_are_not_allowed
-	
-		def you_are_not_allowed(site, match)
-			RAILS_DEFAULT_LOGGER.info "Hack Attempt!  From: #{site}, matched to: #{match}"
-			return render(:file => "#{RAILS_ROOT}/public/404.html", :status => 404)
-		end
-	 
-		...
+    blacklisted_site_response :you_are_not_allowed
+    
+    def you_are_not_allowed(site, match)
+      RAILS_DEFAULT_LOGGER.info "Hack Attempt!  From: #{site}, matched to: #{match}"
+      return render(:file => "#{RAILS_ROOT}/public/404.html", :status => 404)
+    end
+    
+    ...
   end
 
 == Configuration
