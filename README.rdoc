@@ -47,7 +47,5 @@ Each item in the array is either a specific site name, or a regex that will be u
 
 == Credits
 
-SiteBlacklist was created, and is maintained by Joshua Krall @ [http://github.com/jkrall]  
-
-More info at Transparent Development, [http://transfs.com/devblog] , the Transparent Financial Services [http://transfs.com] development blog.
+SiteBlacklist was created, and is maintained by {Joshua Krall}[http://transfs.com/devblog].  More info at {Transparent Development}[http://transfs.com/devblog], the {Transparent Financial Services}[http://transfs.com] development blog.
 
