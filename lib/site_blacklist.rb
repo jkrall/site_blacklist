@@ -96,7 +96,7 @@ module SiteBlacklist
   
   # This is the before_filter callback
   def check_site_blacklist
-    site = request.env['SERVER_NAME']
+    site = request.env['SERVER_NAME'] || ''
     
     if site_blacklisted?(site)
       respond_to_blacklisted_site!(site, @_blacklist_entry)
